@@ -127,3 +127,113 @@
 
 
 
+
+
+
+
+
+
+<!-- <script>
+  import { jsonDataByDate } from "../lib/store.js"; 
+  import { get } from 'svelte/store';
+
+  let currentDate = new Date();
+  let selectedDate = new Date();
+  let today = new Date();
+  let days = [];
+  let eventsForSelectedDay = null;
+
+  // Fonction pour s'assurer que les heures sont à zéro
+  function resetTime(date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  }
+
+  function loadDays(date) {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+
+    const startDay = firstDayOfMonth.getDay() === 0 ? 6 : firstDayOfMonth.getDay() - 1;
+    const endDay = lastDayOfMonth.getDay() === 0 ? 6 : lastDayOfMonth.getDay() - 1;
+
+    days = [];
+
+    // Add days from previous month
+    for (let i = startDay; i > 0; i--) {
+      days.push(resetTime(new Date(year, month, 1 - i)));
+    }
+
+    // Add days of current month
+    for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+      days.push(resetTime(new Date(year, month, i)));
+    }
+
+    // Add days from next month
+    for (let i = 1; i < 7 - endDay; i++) {
+      days.push(resetTime(new Date(year, month + 1, i)));
+    }
+  }
+
+  function handleDayClick(day) {
+    selectedDate = resetTime(day);
+
+    const selectedDateISO = selectedDate.toISOString().slice(0, 10);
+    eventsForSelectedDay = get(jsonDataByDate)[selectedDateISO] || [];
+    console.log("Date sélectionnée :", selectedDateISO);
+    console.log("Événements pour cette date :", eventsForSelectedDay);
+  }
+
+  function goToNextMonth() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    loadDays(currentDate);
+  }
+
+  function goToPreviousMonth() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    loadDays(currentDate);
+  }
+
+  $: loadDays(currentDate);
+</script>
+
+<div>
+  <button on:click={goToPreviousMonth}>Mois précédent</button>
+  <button on:click={goToNextMonth}>Mois suivant</button>
+</div>
+<p>Date actuelle formatée : {currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}</p>
+
+<div class="calendar">
+  {#each days as day}
+    <button
+      class="day
+        {day.getMonth() !== currentDate.getMonth() ? 'other-month' : ''}
+        {day.getTime() === selectedDate.getTime() ? 'selected' : ''}
+        {day.toDateString() === today.toDateString() ? 'today' : ''}
+        {get(jsonDataByDate)[day.toISOString().slice(0, 10)] ? 'has-data' : ''}
+      "
+      on:click={() => handleDayClick(day)}
+    >
+      {day.getDate()}
+    </button>
+  {/each}
+
+  {#if eventsForSelectedDay}
+    <div class="event-info">
+      <p>Il y a {eventsForSelectedDay.length} événement(s) prévu(s) pour cette date.</p>
+      {#each eventsForSelectedDay as event}
+        <p>{event.title}</p>
+        <p>{event.description}</p>
+      {/each}
+    </div>
+  {/if}
+</div>
+
+<style>
+  .day.has-data::after {
+    content: '*';
+    color: red;
+    margin-left: 5px;
+  }
+</style> -->
+
