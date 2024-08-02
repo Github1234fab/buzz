@@ -1,30 +1,16 @@
-
-// Import the functions you need from the SDKs you need
+// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyB1wZueyhJBPhqa1BxI0v3NvdKhGoYK1UE",
-  authDomain: "buzzdesmonts.firebaseapp.com",
-  projectId: "buzzdesmonts",
-  storageBucket: "buzzdesmonts.appspot.com",
-  messagingSenderId: "145766146483",
-  appId: "1:145766146483:web:5d13d66ac564e7365cebc6"
+        apiKey: "AIzaSyCFHBvYMXfOcrus3gU6IgSo9GhibD5YCv8",
+        authDomain: "cimes-ea988.firebaseapp.com",
+        projectId: "cimes-ea988",
+        storageBucket: "cimes-ea988.appspot.com",
+        messagingSenderId: "13894992326",
+        appId: "1:13894992326:web:ebeb90e7c9352e10c3f2c7",
 };
 
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-
-
-async function getEvents() {
-        const eventsCollection = collection(db, "events");
-        const snapshot = await getDocs(eventsCollection);
-        return snapshot.docs.map((doc) => doc.data());
-}
-
-export { getEvents };
+export const db = getFirestore(app);
