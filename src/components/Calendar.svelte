@@ -4,7 +4,7 @@
     import { writable, get } from "svelte/store";
     import Collapse from "../components/Collapse.svelte";
 
-    let currentDate = new Date();
+    let currentDate = writable(new Date());
     let today = new Date();
     let days = [];
     let eventsForSelectedDay = writable([]);
@@ -44,13 +44,17 @@
     }
 
     function goToNextMonth() {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        loadDays(currentDate);
+        const date = get(currentDate);
+        date.setMonth(date.getMonth() + 1);
+        currentDate.set(new Date(date));
+        loadDays(date);
     }
 
     function goToPreviousMonth() {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        loadDays(currentDate);
+        const date = get(currentDate);
+        date.setMonth(date.getMonth() - 1);
+        currentDate.set(new Date(date));
+        loadDays(date);
     }
 
     function adjustForTimezone(date) {
@@ -60,7 +64,7 @@
     }
 
     onMount(() => {
-        loadDays(currentDate);
+        loadDays(get(currentDate));
         // Wait until jsonDataByDate is populated
         const unsubscribe = jsonDataByDate.subscribe((data) => {
             if (Object.keys(data).length > 0) {
@@ -90,14 +94,14 @@
     <button on:click={goToPreviousMonth}>Mois précédent</button>
     <button on:click={goToNextMonth}>Mois suivant</button>
 </div>
-<p>Mois actuellement affiché : {currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}</p>
+<p>Mois actuellement affiché : {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}</p>
 
 {#if $dataLoaded}
     <div class="calendar">
         {#each days as day}
             <button
                 class="day
-                {day.getMonth() !== currentDate.getMonth() ? 'other-month' : ''}
+                {day.getMonth() !== $currentDate.getMonth() ? 'other-month' : ''}
                 {adjustForTimezone(day).toISOString().slice(0, 10) === $selectedDate.toISOString().slice(0, 10) ? 'selected' : ''}
                 {day.toDateString() === today.toDateString() ? 'today' : ''}
                 {get(jsonDataByDate) && get(jsonDataByDate)[adjustForTimezone(day).toISOString().slice(0, 10)] ? 'tag-data' : ''}"
