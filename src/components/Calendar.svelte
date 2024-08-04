@@ -2,6 +2,7 @@
         import { onMount } from "svelte";
         import { jsonDataByDate } from "../lib/store.js";
         import { writable, get } from "svelte/store";
+        import Collapse from "../components/Collapse.svelte";
 
         let currentDate = new Date();
         let selectedDate = new Date();
@@ -106,14 +107,9 @@
                 {/each}
         </div>
         <div class="event-info">
-                <p>{$eventsForSelectedDay.length} événement(s) prévu(s) pour cette date.</p>
+                <p>{$eventsForSelectedDay.length} événement(s) prévu(s) pour cette date. {selectedDate}</p>
                 {#each $eventsForSelectedDay as event}
-                        <p><span class="span-event-info">Date: </span>{event.date}</p>
-                        <p><span class="span-event-info">Organisateur: </span>{event.diffuseur}</p>
-                        <p><span class="span-event-info">Horaire: </span>{event.horaire}</p>
-                        <p><span class="span-event-info">Lieu: </span>{event.lieu}</p>
-                        <p><span class="span-event-info">Tarif : </span>{event.tarif}</p>
-                        <p><span class="span-event-info">Type: </span>{event.type}</p>
+                        <Collapse type={event.type} annonceur={event.annonceur} date={event.date} horaire={event.horaire} lieu={event.lieu} tarif={event.tarif} />
                 {/each}
         </div>
 {:else}
@@ -147,9 +143,7 @@
                 padding: 10px;
                 margin-top: 10px;
         }
-        .span-event-info {
-                font-weight: bold;
-        }
+
         .calendar {
                 display: grid;
                 grid-template-columns: repeat(7, 1fr);
