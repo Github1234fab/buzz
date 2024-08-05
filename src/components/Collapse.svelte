@@ -9,8 +9,8 @@
 
         //   export let number;
         import { fade, slide } from "svelte/transition";
-        // import arrowUp from "arrowUp.svg";
-        // import arrowDown from "arrowDown.svg";
+        // import arrowUp from "/arrowUp.svg";
+        // import arrowDown from "/arrowDown.svg";
 
         let close = false;
 
@@ -24,9 +24,9 @@
                 {type}
                 <span class="button-arrows">
                         {#if close}
-                                <img src= "" alt="Arrow Up" in:fade={{ duration: 1200 }} />
+                                <img src= "arrowUp.svg" alt="Arrow Up" in:fade={{ duration: 1200 }} />
                         {:else}
-                                <img src= ""  alt="Arrow Down" in:fade={{ duration: 1200 }} />
+                                <img src= "arrowDown.svg"  alt="Arrow Down" in:fade={{ duration: 1200 }} />
                         {/if}
                 </span>
         </button>
