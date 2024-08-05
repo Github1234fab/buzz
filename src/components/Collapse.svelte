@@ -19,7 +19,7 @@
         }
 </script>
 
-- <div class="wrapper {close ? 'active' : ''}">
+<div class="wrapper {close ? 'active' : ''}">
         <button class="button" on:click={collapse}>
                 {type}
                 <span class="button-arrows">
