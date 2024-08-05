@@ -113,6 +113,7 @@
                         </button>
                 {/each}
         </div>
+
         <div class="event-info">
                 <p class="current-date-display">
                         {$selectedDate.toISOString().slice(0, 10)}
@@ -153,6 +154,7 @@
                 align-items: center;
                 justify-content: center;
                 margin-bottom: 0.5rem;
+                gap: 10px;
         }
         .currentMonth {
                 text-align: center;
@@ -162,9 +164,10 @@
                 margin-top: 1rem;
         }
         .current-date-display {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 font-weight: bold;
                 text-align: left;
+                margin-bottom: 1rem;
         }
 
         .event-info {
@@ -175,10 +178,12 @@
                 border-top: 1px solid #ddd;
                 padding: 30px;
                 margin-top: 30px;
+                min-height: auto;
+                max-height: auto;
         }
         .number-events {
-                font-size: 1.2rem;
-                font-weight: bold;
+                font-size: 0.9rem;
+                font-weight: 500;
                 margin-bottom: 20px;
         }
         .calendar {

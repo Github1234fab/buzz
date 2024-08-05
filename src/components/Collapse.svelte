@@ -9,8 +9,8 @@
 
         //   export let number;
         import { fade, slide } from "svelte/transition";
-        // import arrowUp from "../assets/arrowUp.svg";
-        // import arrowDown from "../Assets/arrowDown.svg";
+        import arrowUp from "../assets/arrowUp.svg";
+        import arrowDown from "../Assets/arrowDown.svg";
 
         let close = false;
 
@@ -19,14 +19,14 @@
         }
 </script>
 
-<div class="wrapper {close ? 'active' : ''}">
+- <div class="wrapper {close ? 'active' : ''}">
         <button class="button" on:click={collapse}>
                 {type}
                 <span class="button-arrows">
                         {#if close}
-                                <img src="" alt="Arrow Up" in:fade={{ duration: 1200 }} />
+                                <img src={arrowUp} alt="Arrow Up" in:fade={{ duration: 1200 }} />
                         {:else}
-                                <img src="" alt="Arrow Down" in:fade={{ duration: 1200 }} />
+                                <img src={arrowDown} alt="Arrow Down" in:fade={{ duration: 1200 }} />
                         {/if}
                 </span>
         </button>
@@ -51,6 +51,7 @@
                 justify-content: center;
                 align-items: center;
                 width: 80%;
+                height: fit-content;
         }
         .button {
                 position: relative;
@@ -59,7 +60,7 @@
                 padding: 20px;
                 font-size: 1rem;
                 font-weight: 800;
-                width: 100%;
+                width: 90%;
                 cursor: pointer;
                 border: none;
                 border-radius: 8px;
@@ -76,15 +77,16 @@
                 color: rgb(100, 100, 229);
                 font-size: 1em;
                 font-weight: bolder;
-                right: 50px;
+                top: 40px;
+                left: 90%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 padding: 10px;
         }
         .button-arrows img {
-                margin-top: 12px;
-                height: 23px;
+                height: 15px;
+                width: 15px;
         }
         .button-arrows img:hover {
                 animation: bounce 0.4s;
@@ -100,16 +102,16 @@
                 text-align: center;
                 padding: 10px;
                 border-radius: 5px;
-                margin-bottom: 10px;
                 border: none;
         }
 
         .p {
                 width: 100%;
-                text-align: left;
+                text-align: center;
                 font-size: 1rem;
-                font-weight: 200;
-                background-color: rgb(239, 239, 239);
+                font-weight: 400;
+                color: white;
+                background-color: rgb(66, 66, 208);
                 padding: 10px;
                 border-radius: 8px;
                 box-shadow: 0px 0px 15px 4px rgb(0 0 0 / 10%);
