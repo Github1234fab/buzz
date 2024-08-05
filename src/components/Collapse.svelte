@@ -9,8 +9,8 @@
 
         //   export let number;
         import { fade, slide } from "svelte/transition";
-        import arrowUp from "/arrowUp.svg";
-        import arrowDown from "/arrowDown.svg";
+        import arrowUp from "arrowUp.svg";
+        import arrowDown from "arrowDown.svg";
 
         let close = false;
 
