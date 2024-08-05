@@ -1,0 +1,24 @@
+{
+        "name": "Flèche",
+        "short_name": "Flèche",
+        "start_url": "/",
+        "display": "standalone",
+        "background_color": "#ffffff",
+        "theme_color": "#000000",
+        "description": "Application Flèche, notification d'évènement intra-régionale",
+        "icons": [
+                {
+                        "src": "./assets/flècheF.png",
+                        "sizes": "312x324",
+                        "type": "image/png"
+                }
+        ],
+        "screenshots": [
+                {
+                        "src": "./assets/screenshotdesktop.png",
+                        "sizes": "1839x840",
+                        "type": "image/png",
+                        "form_factor": "wide"
+                }
+        ]
+}
