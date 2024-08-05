@@ -8,17 +8,14 @@
         "description": "Application Flèche, notification d'évènement intra-régionale",
         "icons": [
                 {
-                        "src": "./assets/flècheF.png",
-                        "sizes": "312x324",
+                        "src": "/icon-192x192.png",
+                        "sizes": "192x192",
                         "type": "image/png"
-                }
-        ],
-        "screenshots": [
+                },
                 {
-                        "src": "./assets/screenshotdesktop.png",
-                        "sizes": "1839x840",
-                        "type": "image/png",
-                        "form_factor": "wide"
+                        "src": "/icon-512x512.png",
+                        "sizes": "512x512",
+                        "type": "image/png"
                 }
         ]
 }
