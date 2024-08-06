@@ -1,4 +1,5 @@
 {
+        "id": "/",
         "name": "Flèche",
         "short_name": "Flèche",
         "start_url": "/",
@@ -16,6 +17,20 @@
                         "src": "/icon-512x512.png",
                         "sizes": "512x512",
                         "type": "image/png"
+                }
+        ],
+        "screenshots": [
+                {
+                        "src": "/screenshot.png",
+                        "sizes": "1240x613",
+                        "type": "image/png",
+                        "form_factor": "wide"
+                },
+                {
+                        "src": "/screenshotmobile.png",
+                        "sizes": "1280x720",
+                        "type": "image/png",
+                        "form_factor": "wide"
                 }
         ]
 }

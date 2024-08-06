@@ -49,3 +49,27 @@ self.addEventListener("fetch", (event) => {
                 })
         );
 });
+
+self.addEventListener("push", (event) => {
+        console.log("Push reçu : ", event);
+        const title = "Notification push";
+        const options = {
+                body: event.data ? event.data.text() : "Message par défaut.",
+                icon: "/icon-192x192.png",
+                badge: "/icon-192x192.png",
+        };
+        event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener("sync", (event) => {
+        console.log("Synchronisation en arrière-plan : ", event);
+        if (event.tag === "test-tag-from-devtools") {
+                event.waitUntil(doSomeBackgroundSync());
+        }
+});
+
+async function doSomeBackgroundSync() {
+        // Exemple de tâche de synchronisation
+        console.log("Tâche de synchronisation exécutée.");
+        // Implémentez la logique de synchronisation ici, par exemple, envoyer des données hors ligne à un serveur
+}
