@@ -39,16 +39,40 @@ self.addEventListener("fetch", (event) => {
         console.log("Fetching:", event.request.url);
         event.respondWith(
                 caches.match(event.request).then((response) => {
-                        return (
-                                response ||
-                                fetch(event.request).catch((error) => {
+                        if (response) {
+                                fetchAndUpdateCache(event.request);
+                                return response;
+                        }
+                        return fetch(event.request)
+                                .then((response) => {
+                                        if (!response || response.status !== 200 || response.type !== "basic") {
+                                                return response;
+                                        }
+                                        const responseToCache = response.clone();
+                                        caches.open(CACHE_NAME).then((cache) => {
+                                                cache.put(event.request, responseToCache);
+                                        });
+                                        return response;
+                                })
+                                .catch((error) => {
                                         console.error(`Fetch failed for ${event.request.url}:`, error);
                                         throw error;
-                                })
-                        );
+                                });
                 })
         );
 });
+
+function fetchAndUpdateCache(request) {
+        fetch(request).then((response) => {
+                if (!response || response.status !== 200 || response.type !== "basic") {
+                        return;
+                }
+                const responseToCache = response.clone();
+                caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(request, responseToCache);
+                });
+        });
+}
 
 self.addEventListener("push", (event) => {
         console.log("Push reçu : ", event);
@@ -69,7 +93,34 @@ self.addEventListener("sync", (event) => {
 });
 
 async function doSomeBackgroundSync() {
-        // Exemple de tâche de synchronisation
         console.log("Tâche de synchronisation exécutée.");
         // Implémentez la logique de synchronisation ici, par exemple, envoyer des données hors ligne à un serveur
 }
+
+self.addEventListener("message", (event) => {
+        if (event.data === "skipWaiting") {
+                self.skipWaiting();
+        }
+});
+
+function checkForUpdates() {
+        fetch("/app.html")
+                .then((response) => response.text())
+                .then((html) => {
+                        // Code pour vérifier si le contenu HTML a changé
+                });
+}
+
+self.addEventListener("fetch", (event) => {
+        event.respondWith(
+                caches.match(event.request).then((response) => {
+                        const fetchPromise = fetch(event.request).then((networkResponse) => {
+                                caches.open(CACHE_NAME).then((cache) => {
+                                        cache.put(event.request, networkResponse.clone());
+                                });
+                                return networkResponse;
+                        });
+                        return response || fetchPromise;
+                })
+        );
+});
