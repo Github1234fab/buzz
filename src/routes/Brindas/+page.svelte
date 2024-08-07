@@ -1,6 +1,5 @@
 <script>
-
-        import Services from "../components/Services.svelte";
+ import Services from "../../components/Services.svelte";
 </script>
 
 
