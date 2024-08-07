@@ -19,7 +19,7 @@
                                                         description: "depuis 100 ans",
                                                         img: "https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                                                 },
-                                                      {
+                                                {
                                                         adress: "104 rue de la carrosserie",
                                                         advertiser: "Garage Ménon",
                                                         slogan: "10% sur les promos d'été",
@@ -38,36 +38,41 @@
                                                         description: "20 ans d'expérience à votre service",
                                                         img: "https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
                                                 },
-                                                // ... more coiffeur announcements
+                                                {
+                                                        adress: "10 rue du Kaki",
+                                                        advertiser: "Coiff' Magic",
+                                                        slogan: "Nouvelle coupe tendance pour l'été",
+                                                        description: "20 ans d'expérience à votre service",
+                                                        img: "https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                                },
+                                                {
+                                                        adress: "1, rue de la coiffe",
+                                                        advertiser: "Coiff' Magic",
+                                                        slogan: "Nouvelle coupe tendance pour l'été",
+                                                        description: "20 ans d'expérience à votre service",
+                                                        img: "https://images.pexels.com/photos/162553/keys-workshop-mechanic-tools-162553.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                                                },
                                         ],
                                 },
                         ],
                 },
-                // ... other towns with their services and announcements
         ];
 </script>
 
 <section id="annonces">
-    {#each headingsTab as town}
-        <h2>{town.ville}</h2> 
-        <TitleCollapse title={town.title.serviceTitle}>
-            {#each town.services as service} 
-                <TitleCollapse title={service.type}>
-            {#each service.annonces as annonce}
-                        <ServicesCollapse
-                            adress={annonce.adress}
-                            advertiser={annonce.advertiser}
-                            slogan={annonce.slogan}
-                            description={annonce.description}
-                            img={annonce.img}
-                        />
-                    {/each}
+        {#each headingsTab as town}
+                <h2>{town.ville}</h2>
+                <TitleCollapse title={town.title.serviceTitle}>
+                        {#each town.services as service}
+                                <TitleCollapse title={service.type}>
+                                        {#each service.annonces as annonce}
+                                                <ServicesCollapse adress={annonce.adress} advertiser={annonce.advertiser} slogan={annonce.slogan} description={annonce.description} img={annonce.img} />
+                                        {/each}
+                                </TitleCollapse>
+                        {/each}
                 </TitleCollapse>
-            {/each}
-        </TitleCollapse>
-    {/each}
+        {/each}
 </section>
-
 
 <style>
         /* h1 {
