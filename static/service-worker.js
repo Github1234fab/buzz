@@ -37,6 +37,12 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
         console.log("Fetching:", event.request.url);
+
+        // Ignore requests with unsupported schemes
+        if (event.request.url.startsWith("chrome-extension://") || event.request.url.startsWith("https://firestore.googleapis.com/")) {
+                return;
+        }
+
         event.respondWith(
                 caches.match(event.request).then((response) => {
                         if (response) {
@@ -63,14 +69,15 @@ self.addEventListener("fetch", (event) => {
 });
 
 function fetchAndUpdateCache(request) {
-        fetch(request).then((response) => {
+        return fetch(request).then((response) => {
                 if (!response || response.status !== 200 || response.type !== "basic") {
-                        return;
+                        return response;
                 }
                 const responseToCache = response.clone();
                 caches.open(CACHE_NAME).then((cache) => {
                         cache.put(request, responseToCache);
                 });
+                return response;
         });
 }
 
@@ -93,34 +100,7 @@ self.addEventListener("sync", (event) => {
 });
 
 async function doSomeBackgroundSync() {
+        // Exemple de tâche de synchronisation
         console.log("Tâche de synchronisation exécutée.");
         // Implémentez la logique de synchronisation ici, par exemple, envoyer des données hors ligne à un serveur
 }
-
-self.addEventListener("message", (event) => {
-        if (event.data === "skipWaiting") {
-                self.skipWaiting();
-        }
-});
-
-function checkForUpdates() {
-        fetch("/app.html")
-                .then((response) => response.text())
-                .then((html) => {
-                        // Code pour vérifier si le contenu HTML a changé
-                });
-}
-
-self.addEventListener("fetch", (event) => {
-        event.respondWith(
-                caches.match(event.request).then((response) => {
-                        const fetchPromise = fetch(event.request).then((networkResponse) => {
-                                caches.open(CACHE_NAME).then((cache) => {
-                                        cache.put(event.request, networkResponse.clone());
-                                });
-                                return networkResponse;
-                        });
-                        return response || fetchPromise;
-                })
-        );
-});
