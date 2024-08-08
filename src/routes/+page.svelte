@@ -1,7 +1,7 @@
 <script>
         import Calendar from "../components/Calendar.svelte";
         // import FireLoad from "../components/FireLoad.svelte";
-        import FireLoadJsonAdvertisement from "../components/FireLoadJsonAdvertisement.svelte";
+        // import FireLoadJsonAdvertisement from "../components/FireLoadJsonAdvertisement.svelte";
         import UpLoadJson from "../components/UpLoadJson.svelte";
         import UpLoadJsonAdvertisement from "../components/UpLoadJsonAdvertisement.svelte";
         import "../routes/styles.css";
@@ -11,7 +11,7 @@
 <Calendar />
 
 <!-- <FireLoad /> -->
-<FireLoadJsonAdvertisement />
+<!-- <FireLoadJsonAdvertisement /> -->
 <UpLoadJson />
 <UpLoadJsonAdvertisement />
 <Advertisement />

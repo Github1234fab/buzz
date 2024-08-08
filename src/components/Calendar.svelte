@@ -5,6 +5,7 @@
         import { writable, get } from "svelte/store";
         import Collapse from "../components/Collapse.svelte";
 
+
         let startDate = "";
         let endDate = "";
         // let filterField = "annonceur";
@@ -96,15 +97,6 @@
         }
 </script>
 
-<!-- Interface utilisateur pour les filtres -->
-<Filter
-  jsonDataByDate={$jsonDataByDate}
-  {startDate}
-  {endDate}
-  {type}
-  {filterLieu}
-  bind:filteredEvents />
-
 <div class="wrapper-month-display">
         <p class="currentMonth">
                 {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
@@ -130,6 +122,12 @@
                         </button>
                 {/each}
         </div>
+
+        <!-- Interface utilisateur pour les filtres -->
+
+
+        <Filter jsonDataByDate={$jsonDataByDate} {startDate} {endDate} {type} {filterLieu} bind:filteredEvents />
+
 
         <div class="event-info">
                 <p class="current-date-display">
