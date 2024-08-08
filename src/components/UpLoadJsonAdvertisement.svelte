@@ -1,28 +1,20 @@
 <script>
   import { collection, getDocs } from "firebase/firestore";
   import { db } from "../lib/firebase.js";
-  import { jsonServicesByDate } from "../lib/storeAdvertisement.js"; // Importer le store pour les services
+  import { headingsTab } from "../lib/storeAdvertisement.js"; // Importer le store
 
   async function fetchJsonServicesData() {
     try {
       const jsonDataCollection = collection(db, "jsonAdvertisement");
       const querySnapshot = await getDocs(jsonDataCollection);
-      let tempJsonServicesByDate = {};
+      let tempJsonServices = [];
 
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        console.log(data);
-        const eventDate = new Date(data.date);
-        const dateKey = eventDate.toISOString().slice(0, 10);
-
-        if (!tempJsonServicesByDate[dateKey]) {
-          tempJsonServicesByDate[dateKey] = [];
-        }
-
-        tempJsonServicesByDate[dateKey].push(data);
+        tempJsonServices.push(data);
       });
 
-      jsonServicesByDate.set(tempJsonServicesByDate);
+      headingsTab.set(tempJsonServices); // Mettre à jour le store avec les données récupérées
     } catch (error) {
       console.error("Error fetching JSON services data:", error);
     }
@@ -30,3 +22,5 @@
 
   fetchJsonServicesData();
 </script>
+
+<h1>uploadadvertisement</h1>

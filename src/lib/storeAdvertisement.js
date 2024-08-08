@@ -1,3 +1,6 @@
 import { writable } from "svelte/store";
 
-export const jsonServicesByDate = writable({});
+// export const jsonServices = writable({});
+
+
+export const headingsTab = writable([]);
