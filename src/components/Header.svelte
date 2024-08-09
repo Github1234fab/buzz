@@ -1,7 +1,7 @@
 <script>
         import Flèche from "../assets/flècheF.png";
         import svgMenu from "../assets/svg-menu.svg";
-        import {slide} from "svelte/transition";
+        import { slide } from "svelte/transition";
         let menuVisible = false;
         function openCloseMenu() {
                 menuVisible = !menuVisible;
@@ -10,7 +10,8 @@
 
 <header>
         <div class="wrapper-header">
-                <img class="logo" src={Flèche} alt="Logo" />
+                <a href="/">
+                <img class="logo" src={Flèche} alt="Logo" /></a>
                 <h1>Ton alliée, pour ne rien manquer !</h1>
                 <button on:click={openCloseMenu}>
                         <img class="svg-menu" src={svgMenu} alt="Menu" />
@@ -19,24 +20,28 @@
 </header>
 
 <!-- Contenu du menu -->
-<div class="menu-container" >
+<div class="menu-container">
         {#if menuVisible}
-              <div class="menu" transition:slide="{{ duration: 1200 }}">
-                        <a href="/Advertisement">Services</a>
-                        <a href="/">Diffuser une annonce</a>
-                        <a href="/">Apparaître sur Flèche</a>
-                        <a href="/">Nous contacter</a>
+                <div class="menu" transition:slide={{ duration: 1200 }}>
+                        <a href="/Advertisement">Commerces</a>
+                        <a href="/">Publicité</a>
+                        <a href="/">Diffusion</a>
+                        <a href="/">Contact</a>
                         <!-- Ajoutez d'autres éléments de menu ici -->
                 </div>
         {/if}
 </div>
 
 <style>
+        header {
+                box-shadow: 0px 0px 15px 4px rgb(0 0 0 / 10%);
+                padding: 10px;
+        }
         .menu-container {
                 display: flex;
                 justify-content: center;
-                width: 60%;
-                margin: 0px auto;
+                width: 100%;
+                padding: 10px;
         }
 
         .menu {
@@ -44,6 +49,10 @@
                 flex-direction: column;
                 align-items: center;
                 align-content: center;
+                gap: 10px;
+                padding: 20px 40px;
+                border-radius: 10px;
+                box-shadow: 0px 0px 15px 4px rgb(0 0 0 / 10%);
         }
 
         .wrapper-header {
@@ -60,22 +69,27 @@
                 height: 30px; /* Ajustez la taille de l'icône du menu */
                 cursor: pointer;
         }
-button{
+        button {
                 background-color: #f1f1f1;
                 border: none;
                 padding: 10px;
                 cursor: pointer;
                 margin-right: 10px;
         }
-        button:hover{
+        button:hover {
                 background-color: rgb(211, 211, 213);
         }
 
         h1 {
-                font-size: 1rem;
+                font-size: 0.9rem;
                 padding: 10px;
+                font-weight: 500;
         }
-        a{
-                text-decoration: none; 
+        a {
+                text-decoration: none;
+                color: #c71585;
+        }
+        a:hover {
+                color: #00bfff;
         }
 </style>

@@ -14,11 +14,11 @@
 <div class="wrapper {close ? 'active' : ''}">
         <button class="button" on:click={collapse}>
                 {type}
-                <span class="button-arrows">
+                 <span class="button-arrows">
                         {#if close}
-                                <img src="arrowUp.svg" alt="Arrow Up" in:fade={{ duration: 1200 }} />
+                                <img src="moins.svg" alt="Arrow Up" in:fade={{ duration: 1200 }} />
                         {:else}
-                                <img src="arrowDown.svg" alt="Arrow Down" in:fade={{ duration: 1200 }} />
+                                <img src="plus.svg" alt="Arrow Down" in:fade={{ duration: 1200 }} />
                         {/if}
                 </span>
         </button>
@@ -26,6 +26,7 @@
         {#if close}
                 <span class="content" transition:slide={{ duration: 1200 }}>
                         <div class="content {close ? 'less' : ''} " in:fade={{ duration: 1200 }} out:fade={{ duration: 1200 }}></div>
+                          <slot></slot>
                 </span>
         {/if}
 </div>
@@ -36,8 +37,8 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 80%;
-                height: fit-content;
+                width: 100vw;
+                gap: 2px;
         }
         .button {
                 position: relative;
@@ -46,16 +47,15 @@
                 padding: 20px;
                 font-size: 1rem;
                 font-weight: 800;
-                width: 90%;
+                width: 80%;
                 cursor: pointer;
                 border: none;
                 border-radius: 8px;
-                background-color: rgb(255, 255, 255);
+                             background: linear-gradient( 45deg, rgb(255, 255, 255), rgb(214, 72, 134));
                 box-shadow: 0px 0px 15px 4px rgb(0 0 0 / 10%);
                 height: auto;
                 text-align: left;
                 letter-spacing: -1px;
-                margin-bottom: 10px;
         }
         .button-arrows {
                 position: absolute;

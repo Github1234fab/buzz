@@ -23,4 +23,3 @@
   fetchJsonServicesData();
 </script>
 
-<h1>uploadadvertisement</h1>

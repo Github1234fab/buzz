@@ -1,7 +1,7 @@
 <script>
         // export let icon;
      
-        export let title;
+        // export let title;
     
         import { fade, slide } from "svelte/transition";
 
@@ -15,12 +15,12 @@
 
 <div class="wrapper {close ? 'active' : ''}">
         <button class="button" on:click={collapse}>
-                {title}
-                <span class="button-arrows">
+                <!-- {title} -->Commerces
+                  <span class="button-arrows">
                         {#if close}
-                                <img src="arrowUp.svg" alt="Arrow Up" in:fade={{ duration: 1200 }} />
+                                <img src="moins.svg" alt="Arrow Up" in:fade={{ duration: 1200 }} />
                         {:else}
-                                <img src="arrowDown.svg" alt="Arrow Down" in:fade={{ duration: 1200 }} />
+                                <img src="plus.svg" alt="Arrow Down" in:fade={{ duration: 1200 }} />
                         {/if}
                 </span>
         </button>
@@ -40,8 +40,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 80%;
-                height: fit-content;
+                width: 100vw;
         }
         .button {
                 position: relative;
@@ -59,7 +58,6 @@
                 height: auto;
                 text-align: left;
                 letter-spacing: -1px;
-                margin-bottom: 10px;
         }
         .button-arrows {
                 position: absolute;
@@ -67,7 +65,7 @@
                 color: rgb(100, 100, 229);
                 font-size: 1em;
                 font-weight: bolder;
-                top: 40px;
+                top: 20%;
                 left: 90%;
                 display: flex;
                 align-items: center;
@@ -89,7 +87,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 10px;
+                gap: 2px;
                 text-align: center;
                 padding: 10px;
                 border-radius: 5px;
@@ -115,21 +113,5 @@
                 }
         }
 
-        @media screen and (max-width: 768px) {
-                .wrapper {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        width: 100vw;
-                }
-                .button {
-                        font-size: 1em;
-                }
-
-                .button-arrows {
-                        right: 0px;
-                        margin-top: -30px;
-                }
-        }
+       
 </style>

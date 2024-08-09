@@ -5,13 +5,24 @@
         import UpLoadJson from "../components/UpLoadJson.svelte";
         import UpLoadJsonAdvertisement from "../components/UpLoadJsonAdvertisement.svelte";
         import "../routes/styles.css";
-        import Advertisement from "../components/Advertisement.svelte";
+        // import Advertisement from "../components/Advertisement.svelte";
+
 </script>
 
+<main>
 <Calendar />
 
 <!-- <FireLoad /> -->
 <!-- <FireLoadJsonAdvertisement /> -->
 <UpLoadJson />
 <UpLoadJsonAdvertisement />
-<Advertisement />
+
+<!-- <Advertisement /> -->
+
+</main>
+
+<style>
+        main{
+       height: auto;
+        }
+</style>

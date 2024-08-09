@@ -6,10 +6,7 @@
         export let description;
         export let img;
 
-        //   export let number;
         import { fade, slide } from "svelte/transition";
-        // import arrowUp from "/arrowUp.svg";
-        // import arrowDown from "/arrowDown.svg";
 
         let close = false;
 
@@ -21,11 +18,11 @@
 <div class="wrapper {close ? 'active' : ''}">
         <button class="button" on:click={collapse}>
                 {advertiser}
-                <span class="button-arrows">
+                 <span class="button-arrows">
                         {#if close}
-                                <img src="arrowUp.svg" alt="Arrow Up" in:fade={{ duration: 1200 }} />
+                                <img src="moins.svg" alt="Arrow Up" in:fade={{ duration: 1200 }} />
                         {:else}
-                                <img src="arrowDown.svg" alt="Arrow Down" in:fade={{ duration: 1200 }} />
+                                <img src="plus.svg" alt="Arrow Down" in:fade={{ duration: 1200 }} />
                         {/if}
                 </span>
         </button>
@@ -48,8 +45,8 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                width: 80%;
-                height: fit-content;
+                width: 100vw;
+                gap: 3px;
         }
         .button {
                 position: relative;
@@ -58,16 +55,15 @@
                 padding: 20px;
                 font-size: 1rem;
                 font-weight: 800;
-                width: 90%;
+                width: 70%;
                 cursor: pointer;
                 border: none;
                 border-radius: 8px;
-                background-color: rgb(255, 255, 255);
+                background: linear-gradient( 45deg, rgb(255, 255, 255), rgb(201, 144, 12));
                 box-shadow: 0px 0px 15px 4px rgb(0 0 0 / 10%);
                 height: auto;
                 text-align: left;
                 letter-spacing: -1px;
-                margin-bottom: 10px;
         }
         .button-arrows {
                 position: absolute;
@@ -90,23 +86,25 @@
                 animation: bounce 0.4s;
         }
         .service-img {
-                width: 50%;
-                height: 50%;
+                width: 100%;
+                height: auto;
                 object-fit: cover;
                 border-radius: 8px;
+                box-shadow: 0px 0px 15px 4px rgb(0 0 0 / 10%);
         }
 
         .content {
-                width: 90%;
+                width: 80%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 10px;
+                /* gap: 10px; */
                 text-align: center;
                 padding: 10px;
                 border-radius: 5px;
                 border: none;
+                background-color: rgb(162, 26, 79);
         }
 
         .p {
@@ -115,8 +113,7 @@
                 font-size: 1rem;
                 font-weight: 400;
                 color: white;
-                background-color: rgb(66, 66, 208);
-                padding: 10px;
+                padding: 6px;
                 border-radius: 8px;
                 box-shadow: 0px 0px 15px 4px rgb(0 0 0 / 10%);
         }
