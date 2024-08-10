@@ -95,11 +95,11 @@
 
         .content {
                 width: 80%;
+                height: 100%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                /* gap: 10px; */
                 text-align: center;
                 padding: 10px;
                 border-radius: 5px;

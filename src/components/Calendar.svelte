@@ -96,14 +96,14 @@
         }
 </script>
 
-<section>
+<!-- <section> -->
         <div class="wrapper-month-display">
                 <p class="currentMonth">
                         {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
                 </p>
                 <div>
-                        <button  class ="button-mont-select" on:click={goToPreviousMonth}>Mois précédent</button>
-                        <button class ="button-mont-select" on:click={goToNextMonth}>Mois suivant</button>
+                        <button class="button-mont-select" on:click={goToPreviousMonth}>Mois précédent</button>
+                        <button class="button-mont-select" on:click={goToNextMonth}>Mois suivant</button>
                 </div>
         </div>
 
@@ -126,7 +126,7 @@
                 <!-- Interface utilisateur pour les filtres -->
                 <Filter jsonDataByDate={$jsonDataByDate} {startDate} {endDate} {type} {filterLieu} bind:filteredEvents />
                 <div class="event-info">
-                              <div class="wrapper-collapse">
+                        <div class="wrapper-collapse">
                                 {#each $filteredEvents as event}
                                         <Collapse type={event.type} annonceur={event.annonceur} date={event.date} horaire={event.horaire} lieu={event.lieu} tarif={event.tarif} />
                                 {/each}
@@ -135,21 +135,20 @@
                               Date selectionnée:  {$selectedDate.toISOString().slice(0, 10)}
                         </p>
                         <p class="number-events">{$filteredEvents.length} événement(s) prévu(s) pour cette date.</p> -->
-                  
                 </div>
         {:else}
                 <p>Chargement des données...</p>
         {/if}
-</section>
+<!-- </section> -->
 
 <style>
-        section {
+        /* section {
                 height: auto;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 flex-direction: column;
-        }
+        } */
         .wrapper-collapse {
                 display: flex;
                 flex-direction: column;
@@ -157,11 +156,9 @@
                 justify-content: center;
                 gap: 10px;
                 max-width: 60%;
-                flex-grow: 1; 
         }
-        .button-mont-select{
+        .button-mont-select {
                 background-color: #32cd3292;
-
         }
         button.tag-data::after {
                 position: absolute;
@@ -207,7 +204,7 @@
                 padding: 8px;
                 border-radius: 10px;
         } */
-          /* .number-events {
+        /* .number-events {
                 font-size: 0.9rem;
                 font-weight: 500;
                 margin-bottom: 20px;
@@ -215,18 +212,17 @@
 
         .event-info {
                 display: flex;
-                  flex-grow: 1; 
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
-               height: auto;
+                justify-content: flex-start;
+                height: 100vh;
                 padding: 30px;
                 margin-top: 0px auto;
-                max-width: auto;
+                width: auto;
                 border-radius: 8px;
-                background: linear-gradient(  25deg, rgb(180, 152, 167)  , rgb(228, 197, 213)     ) 
+                background: linear-gradient(25deg, rgb(180, 152, 167), rgb(228, 197, 213));
         }
-       
+
         .calendar {
                 display: grid;
                 grid-template-columns: repeat(7, 1fr);
