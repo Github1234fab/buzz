@@ -6,5 +6,6 @@
 
 html, body{
         font-family: Jost;
-        background-color: #ffffff;
+        /* background-color: #ffffff; */
+        background-color: blueviolet;
 }

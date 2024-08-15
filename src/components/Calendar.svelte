@@ -97,58 +97,53 @@
 </script>
 
 <!-- <section> -->
-        <div class="wrapper-month-display">
-                <p class="currentMonth">
-                        {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
-                </p>
-                <div>
-                        <button class="button-mont-select" on:click={goToPreviousMonth}>Mois précédent</button>
-                        <button class="button-mont-select" on:click={goToNextMonth}>Mois suivant</button>
-                </div>
+<div class="wrapper-month-display">
+        <p class="currentMonth">
+                {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
+        </p>
+        <div>
+                <button class="button-mont-select" on:click={goToPreviousMonth}>Mois précédent</button>
+                <button class="button-mont-select" on:click={goToNextMonth}>Mois suivant</button>
         </div>
+</div>
 
-        {#if $dataLoaded}
-                <div class="calendar">
-                        {#each days as day}
-                                <button
-                                        class="day
+{#if $dataLoaded}
+        <div class="calendar">
+                {#each days as day}
+                        <button
+                                class="day
           {day.getMonth() !== $currentDate.getMonth() ? 'other-month' : ''}
           {adjustForTimezone(day).toISOString().slice(0, 10) === $selectedDate.toISOString().slice(0, 10) ? 'selected' : ''}
           {day.toDateString() === today.toDateString() ? 'today' : ''}
           {get(jsonDataByDate) && get(jsonDataByDate)[adjustForTimezone(day).toISOString().slice(0, 10)] ? 'tag-data' : ''}"
-                                        on:click={() => handleDayClick(day)}
-                                >
-                                        {day.getDate()}
-                                </button>
+                                on:click={() => handleDayClick(day)}
+                        >
+                                {day.getDate()}
+                        </button>
+                {/each}
+        </div>
+
+        <!-- Interface utilisateur pour les filtres -->
+        <Filter jsonDataByDate={$jsonDataByDate} {startDate} {endDate} {type} {filterLieu} bind:filteredEvents />
+        <div class="event-info">
+                <div class="wrapper-collapse">
+                        {#each $filteredEvents as event}
+                                <Collapse type={event.type} annonceur={event.annonceur} date={event.date} horaire={event.horaire} lieu={event.lieu} tarif={event.tarif} />
                         {/each}
                 </div>
-
-                <!-- Interface utilisateur pour les filtres -->
-                <Filter jsonDataByDate={$jsonDataByDate} {startDate} {endDate} {type} {filterLieu} bind:filteredEvents />
-                <div class="event-info">
-                        <div class="wrapper-collapse">
-                                {#each $filteredEvents as event}
-                                        <Collapse type={event.type} annonceur={event.annonceur} date={event.date} horaire={event.horaire} lieu={event.lieu} tarif={event.tarif} />
-                                {/each}
-                        </div>
-                        <!-- <p class="current-date-display">
+                <!-- <p class="current-date-display">
                               Date selectionnée:  {$selectedDate.toISOString().slice(0, 10)}
                         </p>
                         <p class="number-events">{$filteredEvents.length} événement(s) prévu(s) pour cette date.</p> -->
-                </div>
-        {:else}
-                <p>Chargement des données...</p>
-        {/if}
+        </div>
+{:else}
+        <p>Chargement des données...</p>
+{/if}
+
 <!-- </section> -->
 
 <style>
-        /* section {
-                height: auto;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-        } */
+       
         .wrapper-collapse {
                 display: flex;
                 flex-direction: column;
