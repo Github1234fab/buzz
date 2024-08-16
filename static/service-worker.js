@@ -102,3 +102,29 @@ self.addEventListener("sync", (event) => {
 async function doSomeBackgroundSync() {
         console.log("Tâche de synchronisation exécutée.");
 }
+
+// ******************************************************
+
+self.addEventListener("install", (event) => {
+        self.skipWaiting(); // Force immédiatement l'activation de la nouvelle version
+});
+if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.addEventListener("controllerchange", function () {
+                // Affichez une notification ou une alerte pour indiquer à l'utilisateur qu'une mise à jour est disponible
+                alert("Une nouvelle version est disponible, veuillez recharger la page.");
+        });
+}
+self.addEventListener("activate", (event) => {
+        event.waitUntil(
+                caches.keys().then((cacheNames) => {
+                        return Promise.all(
+                                cacheNames.map((cacheName) => {
+                                        if (cacheName !== CACHE_NAME) {
+                                                return caches.delete(cacheName);
+                                        }
+                                })
+                        );
+                })
+        );
+        return self.clients.claim(); // Prend immédiatement le contrôle de tous les clients
+});
