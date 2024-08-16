@@ -1,20 +1,15 @@
-const CACHE_NAME = "flech-cache-v1";
+const CACHE_NAME = "flech-cache-v2"; // Changez le nom du cache pour chaque nouvelle version
 const urlsToCache = ["/", "/app.html", "/styles.css", "/icon-192x192.png", "/icon-512x512.png", "/manifest.json"];
 
 self.addEventListener("install", (event) => {
         console.log("Service Worker installing.");
         event.waitUntil(
-                caches
-                        .open(CACHE_NAME)
-                        .then((cache) => {
-                                console.log("Opened cache");
-                                return cache.addAll(urlsToCache).catch((error) => {
-                                        console.error("Failed to cache:", error);
-                                });
-                        })
-                        .catch((error) => {
-                                console.error("Failed to open cache:", error);
-                        })
+                caches.open(CACHE_NAME).then((cache) => {
+                        console.log("Opened cache");
+                        return cache.addAll(urlsToCache).catch((error) => {
+                                console.error("Failed to cache:", error);
+                        });
+                })
         );
 });
 
@@ -22,23 +17,28 @@ self.addEventListener("activate", (event) => {
         console.log("Service Worker activating.");
         const cacheWhitelist = [CACHE_NAME];
         event.waitUntil(
-                caches.keys().then((cacheNames) => {
-                        return Promise.all(
-                                cacheNames.map((cacheName) => {
-                                        if (cacheWhitelist.indexOf(cacheName) === -1) {
-                                                console.log("Deleting old cache:", cacheName);
-                                                return caches.delete(cacheName);
-                                        }
-                                })
-                        );
-                })
+                caches
+                        .keys()
+                        .then((cacheNames) => {
+                                return Promise.all(
+                                        cacheNames.map((cacheName) => {
+                                                if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                                        console.log("Deleting old cache:", cacheName);
+                                                        return caches.delete(cacheName);
+                                                }
+                                        })
+                                );
+                        })
+                        .then(() => {
+                                // Indique au service worker qu'il doit prendre le contrôle immédiat
+                                return self.clients.claim();
+                        })
         );
 });
 
 self.addEventListener("fetch", (event) => {
         console.log("Fetching:", event.request.url);
 
-        // Ignore requests with unsupported schemes
         if (event.request.url.startsWith("chrome-extension://") || event.request.url.startsWith("https://firestore.googleapis.com/")) {
                 return;
         }
@@ -46,7 +46,7 @@ self.addEventListener("fetch", (event) => {
         event.respondWith(
                 caches.match(event.request).then((response) => {
                         if (response) {
-                                fetchAndUpdateCache(event.request);
+                                fetchAndUpdateCache(event.request); // Optionnel : met à jour le cache en arrière-plan
                                 return response;
                         }
                         return fetch(event.request)
@@ -100,8 +100,5 @@ self.addEventListener("sync", (event) => {
 });
 
 async function doSomeBackgroundSync() {
-        // Exemple de tâche de synchronisation
         console.log("Tâche de synchronisation exécutée.");
-        // Implémentez la logique de synchronisation ici, par exemple, envoyer des données hors ligne à un serveur
 }
-
