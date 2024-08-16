@@ -1,4 +1,4 @@
-const CACHE_NAME = "flech-cache-v2"; // Changez le nom du cache pour chaque nouvelle version
+const CACHE_NAME = "flech-cache-v3"; // Changez le nom du cache pour chaque nouvelle version
 const urlsToCache = ["/", "/app.html", "/styles.css", "/icon-192x192.png", "/icon-512x512.png", "/manifest.json"];
 
 self.addEventListener("install", (event) => {
