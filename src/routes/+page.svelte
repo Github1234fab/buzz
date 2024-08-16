@@ -1,29 +1,40 @@
 <script>
-        import Calendar from "../components/Calendar.svelte";
-        // import FireLoad from "../components/FireLoad.svelte";
-        // import FireLoadJsonAdvertisement from "../components/FireLoadJsonAdvertisement.svelte";
-        import UpLoadJson from "../components/UpLoadJson.svelte";
-        import UpLoadJsonAdvertisement from "../components/UpLoadJsonAdvertisement.svelte";
-        import "../routes/styles.css";
-        // import Advertisement from "../components/Advertisement.svelte";
-        // import TestCollapse from "../components/TestCollapse.svelte";
+    import { onMount } from 'svelte';
+    import Header from "../components/Header.svelte";
+    import Footer from "../components/Footer.svelte";
 
+    // Enregistrement du Service Worker
+    onMount(() => {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').then((registration) => {
+                registration.onupdatefound = () => {
+                    const installingWorker = registration.installing;
+                    installingWorker.onstatechange = () => {
+                        if (installingWorker.state === 'installed') {
+                            if (navigator.serviceWorker.controller) {
+                                // Informer l'utilisateur de la nouvelle version disponible
+                                if (confirm("Une nouvelle version de l'application est disponible. Voulez-vous recharger?")) {
+                                    window.location.reload();
+                                }
+                            }
+                        }
+                    };
+                };
+            }).catch((error) => {
+                console.error("Erreur lors de l'enregistrement du Service Worker:", error);
+            });
+        }
+    });
 </script>
 
 <main>
-<Calendar />
-
-<!-- <FireLoad /> -->
-<!-- <FireLoadJsonAdvertisement /> -->
-<UpLoadJson />
-<UpLoadJsonAdvertisement />
-<!-- <TestCollapse/> -->
-<!-- <Advertisement /> -->
-
+    <Header />
+    <slot />
+    <Footer />
 </main>
 
 <style>
-        main{
-       height: auto;
-        }
+    main {
+        min-height: 100vh;
+    }
 </style>
