@@ -158,7 +158,7 @@
         button.tag-data::after {
                 position: absolute;
                 content: "*";
-                background-color: white;
+                background-color: rgb(97, 73, 250);
                 width: 30%;
                 height: 30%;
                 transform: rotate(45deg);

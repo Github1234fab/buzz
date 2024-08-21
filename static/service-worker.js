@@ -1,4 +1,4 @@
-const CACHE_NAME = "flech-cache-v3"; // Changez le nom du cache pour chaque nouvelle version
+const CACHE_NAME = "flech-cache-v3";
 const urlsToCache = ["/", "/app.html", "/styles.css", "/icon-192x192.png", "/icon-512x512.png", "/manifest.json"];
 
 self.addEventListener("install", (event) => {
@@ -11,18 +11,18 @@ self.addEventListener("install", (event) => {
                         });
                 })
         );
+        self.skipWaiting(); // Force l'activation immédiate de la nouvelle version
 });
 
 self.addEventListener("activate", (event) => {
         console.log("Service Worker activating.");
-        const cacheWhitelist = [CACHE_NAME];
         event.waitUntil(
                 caches
                         .keys()
                         .then((cacheNames) => {
                                 return Promise.all(
                                         cacheNames.map((cacheName) => {
-                                                if (cacheWhitelist.indexOf(cacheName) === -1) {
+                                                if (cacheName !== CACHE_NAME) {
                                                         console.log("Deleting old cache:", cacheName);
                                                         return caches.delete(cacheName);
                                                 }
@@ -30,8 +30,7 @@ self.addEventListener("activate", (event) => {
                                 );
                         })
                         .then(() => {
-                                // Indique au service worker qu'il doit prendre le contrôle immédiat
-                                return self.clients.claim();
+                                return self.clients.claim(); // Prend immédiatement le contrôle de tous les clients
                         })
         );
 });
@@ -103,28 +102,10 @@ async function doSomeBackgroundSync() {
         console.log("Tâche de synchronisation exécutée.");
 }
 
-// ******************************************************
-
-self.addEventListener("install", (event) => {
-        self.skipWaiting(); // Force immédiatement l'activation de la nouvelle version
-});
+// Gestion du changement de contrôleur pour détecter une nouvelle version
 if ("serviceWorker" in navigator) {
         navigator.serviceWorker.addEventListener("controllerchange", function () {
-                // Affichez une notification ou une alerte pour indiquer à l'utilisateur qu'une mise à jour est disponible
+                // Affiche une notification ou une alerte pour indiquer à l'utilisateur qu'une mise à jour est disponible
                 alert("Une nouvelle version est disponible, veuillez recharger la page.");
         });
 }
-self.addEventListener("activate", (event) => {
-        event.waitUntil(
-                caches.keys().then((cacheNames) => {
-                        return Promise.all(
-                                cacheNames.map((cacheName) => {
-                                        if (cacheName !== CACHE_NAME) {
-                                                return caches.delete(cacheName);
-                                        }
-                                })
-                        );
-                })
-        );
-        return self.clients.claim(); // Prend immédiatement le contrôle de tous les clients
-});
