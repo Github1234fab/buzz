@@ -11,7 +11,7 @@ self.addEventListener("install", (event) => {
                         });
                 })
         );
-        self.skipWaiting(); // Force l'activation immédiate de la nouvelle version
+        // self.skipWaiting(); // Force l'activation immédiate de la nouvelle version
 });
 
 self.addEventListener("activate", (event) => {
