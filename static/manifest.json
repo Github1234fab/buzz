@@ -1,4 +1,3 @@
-
 {
         "id": "/",
         "name": "Flèche",
@@ -7,7 +6,7 @@
         "display": "standalone",
         "background_color": "#ffffff",
         "theme_color": "#000000",
-        "description": "Application Flèche, notification d'évènement intra-régionale",
+        "description": "Application Flèche, notification d'évènement locale",
         "icons": [
                 {
                         "src": "/icon-192x192.png",
@@ -32,6 +31,16 @@
                         "sizes": "1280x720",
                         "type": "image/png",
                         "form_factor": "wide"
+                },
+                {
+                        "src": "/screenShot.png",
+                        "sizes": "1240x613",
+                        "type": "image/png"
+                },
+                {
+                        "src": "/screenshotMobile.png",
+                        "sizes": "1280x720",
+                        "type": "image/png"
                 }
         ]
 }
