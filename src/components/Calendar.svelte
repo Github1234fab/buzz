@@ -102,8 +102,8 @@
                 {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
         </p>
         <div>
-                <button class="button-mont-select" on:click={goToPreviousMonth}>Mois précédent</button>
-                <button class="button-mont-select" on:click={goToNextMonth}>Mois suivant</button>
+                <button class="button-mont-select" on:click={goToPreviousMonth}><i class="fa-solid fa-angle-left"></i></button>
+                <button class="button-mont-select" on:click={goToNextMonth}><i class="fa-solid fa-angle-right"></i></button>
         </div>
 </div>
 
@@ -153,7 +153,7 @@
                 max-width: 60%;
         }
         .button-mont-select {
-                background-color: #32cd3292;
+                background-color: var(--colorA);
         }
         button.tag-data::after {
                 position: absolute;
@@ -190,21 +190,7 @@
                 text-transform: capitalize;
                 margin-top: 1rem;
         }
-        /* .current-date-display {
-                font-size: 1.2rem;
-                font-weight: 400;
-                text-align: left;
-                margin-bottom: 1rem;
-                color: rgb(82, 8, 44);
-                padding: 8px;
-                border-radius: 10px;
-        } */
-        /* .number-events {
-                font-size: 0.9rem;
-                font-weight: 500;
-                margin-bottom: 20px;
-        } */
-
+   
         .event-info {
                 display: flex;
                 flex-direction: column;
@@ -222,7 +208,7 @@
                 display: grid;
                 grid-template-columns: repeat(7, 1fr);
                 gap: 5px;
-                padding: 20px;
+                padding: 30px;
         }
         .day {
                 padding: 10px;
@@ -238,5 +224,8 @@
         }
         .today {
                 background-color: yellow;
+                color: black;
+                font-weight: bold;
+                border: 1px solid grey;
         }
 </style>
