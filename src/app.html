@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
         <head>
                 <meta charset="utf-8" />
@@ -28,4 +28,48 @@
                         }
                 </script>
         </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://kit.fontawesome.com/34232c07fe.js" crossorigin="anonymous"></script>
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Zain:wght@200;300;400;700;800;900&display=swap" rel="stylesheet" />
+    %sveltekit.head%
+</head>
+<body data-sveltekit-preload-data="hover">
+    <div style="display: contents">%sveltekit.body%</div>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker.register("/service-worker.js").then(
+                    (registration) => {
+                        console.log("ServiceWorker registration successful with scope: ", registration.scope);
+
+                        // Demander la permission pour les notifications
+                        Notification.requestPermission().then(permission => {
+                            if (permission === "granted") {
+                                console.log("Permission de notification accordée.");
+                            } else {
+                                console.log("Permission de notification refusée.");
+                            }
+                        });
+
+                    },
+                    (error) => {
+                        console.log("ServiceWorker registration failed: ", error);
+                    }
+                );
+            });
+        }
+    </script>
+</body>
 </html>
+
+

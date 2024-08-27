@@ -80,15 +80,35 @@ function fetchAndUpdateCache(request) {
         });
 }
 
+// self.addEventListener("push", (event) => {
+//         console.log("Push reçu : ", event);
+//         const title = "Notification push";
+//         const options = {
+//                 body: event.data ? event.data.text() : "Message par défaut.",
+//                 icon: "/icon-192x192.png",
+//                 badge: "/icon-192x192.png",
+//         };
+//         event.waitUntil(self.registration.showNotification(title, options));
+// });
+
 self.addEventListener("push", (event) => {
         console.log("Push reçu : ", event);
-        const title = "Notification push";
-        const options = {
-                body: event.data ? event.data.text() : "Message par défaut.",
-                icon: "/icon-192x192.png",
-                badge: "/icon-192x192.png",
-        };
-        event.waitUntil(self.registration.showNotification(title, options));
+
+        if (Notification.permission === "granted") {
+                const title = "Notification push";
+                const options = {
+                        body: event.data ? event.data.text() : "Message par défaut.",
+                        icon: "/icon-192x192.png",
+                        badge: "/icon-192x192.png",
+                };
+                event.waitUntil(
+                        self.registration.showNotification(title, options).catch((error) => {
+                                console.error("Erreur lors de l'affichage de la notification:", error);
+                        })
+                );
+        } else {
+                console.warn("Permission de notification non accordée. La notification n'a pas été affichée.");
+        }
 });
 
 self.addEventListener("sync", (event) => {
