@@ -1,10 +1,11 @@
 <script>
         export let type;
         export let annonceur;
-        export let horaire;
+        export let début;
         export let date;
         export let lieu;
         export let tarif;
+        export let fin;
         import { fade, slide } from "svelte/transition";
 
         let close = false;
@@ -29,12 +30,14 @@
 
                 {#if close}
                         <span class="span-content" transition:slide={{ duration: 1200 }}>
-                                <div class="content {close ? 'less' : ''} " in:fade={{ duration: 1200 }} out:fade={{ duration: 1200 }}  >
+                                <div class="content {close ? 'less' : ''} " in:fade={{ duration: 1200 }} out:fade={{ duration: 1200 }}>
                                         <p class="p">Date: {date}</p>
-                                        <p class="p">Horaire: {horaire}</p>
+                                        <p class="p">Horaire début: {début}</p>
+                                         <p class="p">Horaire fin: {fin}</p>
                                         <p class="p">Tarif: {tarif}</p>
                                         <p class="p">Lieu: {lieu}</p>
                                         <p class="p">Annonceur: {annonceur}</p>
+                                   
                                 </div>
                         </span>
                 {/if}
@@ -93,8 +96,8 @@
         .button-arrows img:hover {
                 animation: bounce 0.4s;
         }
-      
-.span-content {
+
+        .span-content {
                 width: 80%;
         }
         .content {
@@ -134,5 +137,4 @@
                         transform: scale(1) translateY(0);
                 }
         }
-
 </style>

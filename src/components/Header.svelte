@@ -25,7 +25,7 @@
                 <div class="menu" transition:slide={{ duration: 1200 }}>
                         <a href="/Advertisement">Commerces</a>
                         <a href="/">Publicité</a>
-                        <a href="/">Diffusion</a>
+                        <a href="/ImportExportJson">Diffusion</a>
                         <a href="/">Contact</a>
                         <!-- Ajoutez d'autres éléments de menu ici -->
                 </div>

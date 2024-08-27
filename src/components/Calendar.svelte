@@ -96,7 +96,7 @@
         }
 </script>
 
-<!-- <section> -->
+
 <div class="wrapper-month-display">
         <p class="currentMonth">
                 {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
@@ -128,7 +128,7 @@
         <div class="event-info">
                 <div class="wrapper-collapse">
                         {#each $filteredEvents as event}
-                                <Collapse type={event.type} annonceur={event.annonceur} date={event.date} horaire={event.horaire} lieu={event.lieu} tarif={event.tarif} />
+                                <Collapse annonceur={event.annonceur} date={event.date} lieu={event.lieu} tarif={event.tarif}  fin={event.fin} début={event.début} type={event.type}/>
                         {/each}
                 </div>
                 <!-- <p class="current-date-display">
@@ -140,7 +140,7 @@
         <p>Chargement des données...</p>
 {/if}
 
-<!-- </section> -->
+
 
 <style>
        
