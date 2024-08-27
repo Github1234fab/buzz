@@ -109,3 +109,9 @@ if ("serviceWorker" in navigator) {
                 alert("Une nouvelle version est disponible, veuillez recharger la page.");
         });
 }
+
+navigator.serviceWorker.addEventListener("controllerchange", function () {
+        if (confirm("Une nouvelle version est disponible. Recharger la page maintenant ?")) {
+                window.location.reload();
+        }
+});
