@@ -7,11 +7,8 @@
 
         let startDate = "";
         let endDate = "";
-        // let filterField = "annonceur";
-        // let filterValue = "";
+        let filterLieu = "";
         let type = "";
-        // let filterTitle = ""; // Nouveau champ pour filtrer par titre
-        let filterLieu = ""; // Nouveau champ pour filtrer par lieu
 
         let currentDate = writable(new Date());
         let today = new Date();
@@ -122,7 +119,7 @@
                 {/each}
         </div>
 
-        <!-- Interface utilisateur pour les filtres -->
+        <!-- Interface utilisateur pour les filtres   -->
         <Filter jsonDataByDate={$jsonDataByDate} {startDate} {endDate} {type} {filterLieu} bind:filteredEvents />
         <div class="event-info">
                 <div class="wrapper-collapse">
@@ -130,10 +127,10 @@
                                 <Collapse annonceur={event.annonceur} date={event.date} lieu={event.lieu} tarif={event.tarif} fin={event.fin} début={event.début} type={event.type} />
                         {/each}
                 </div>
-                <!-- <p class="current-date-display">
-                              Date selectionnée:  {$selectedDate.toISOString().slice(0, 10)}
-                        </p>
-                        <p class="number-events">{$filteredEvents.length} événement(s) prévu(s) pour cette date.</p> -->
+                <p class="current-date-display">
+                        Date selectionnée: {$selectedDate.toISOString().slice(0, 10)}
+                </p>
+                <p class="number-events">{$filteredEvents.length} événement(s) prévu(s) pour cette date.</p>
         </div>
 {:else}
         <p>Chargement des données...</p>

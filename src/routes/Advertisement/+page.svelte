@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
         import TitleCollapse from "../../components/TitleCollapse.svelte";
         import ServicesCollapse from "../../components/ServicesCollapse.svelte";
         import TitleServicesCollapse from "../../components/TitleServicesCollapse.svelte";
@@ -66,4 +66,4 @@ section {
                 margin: 1rem 0;
                 text-align: center;
         }
-</style>
+</style> -->

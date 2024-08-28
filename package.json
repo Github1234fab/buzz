@@ -17,14 +17,7 @@
         },
         "type": "module",
         "dependencies": {
-                "@aws-sdk/client-s3": "^3.621.0",
-                "aws-sdk": "^2.1665.0",
-                "axios": "^1.7.2",
-                "cors": "^2.8.5",
-                "dotenv": "^16.4.5",
-                "express": "^4.19.2",
-                "firebase": "^10.12.4",
-                "mongodb": "^6.8.0"
+                "firebase": "^10.12.4"
         },
         "description": "Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).",
         "main": "svelte.config.js",

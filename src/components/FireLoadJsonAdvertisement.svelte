@@ -24,7 +24,7 @@
 
         const batch = writeBatch(db);
         data.forEach((docData) => {
-          const docRef = doc(collection(db, 'jsonAdvertisement'), docData.id);
+          const docRef = doc(collection(db, 'fleche-commerces'), docData.id);
           batch.set(docRef, docData);
         });
 
