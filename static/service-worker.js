@@ -11,7 +11,7 @@ self.addEventListener("install", (event) => {
                         });
                 })
         );
-         self.skipWaiting(); // Force l'activation immédiate de la nouvelle version
+        self.skipWaiting(); // Force l'activation immédiate de la nouvelle version
 });
 
 self.addEventListener("activate", (event) => {
@@ -67,29 +67,27 @@ self.addEventListener("fetch", (event) => {
         );
 });
 
+
 function fetchAndUpdateCache(request) {
-        return fetch(request).then((response) => {
-                if (!response || response.status !== 200 || response.type !== "basic") {
-                        return response;
-                }
-                const responseToCache = response.clone();
-                caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(request, responseToCache);
-                });
+    console.log("Fetching URL:", request.url);
+
+    return fetch(request)
+        .then((response) => {
+            if (!response || response.status !== 200 || response.type !== "basic") {
+                console.error("Fetch failed: ", response);
                 return response;
+            }
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+                cache.put(request, responseToCache);
+            });
+            return response;
+        })
+        .catch((error) => {
+            console.error("Fetch failed for", request.url, error);
+            throw error;
         });
 }
-
-self.addEventListener("push", (event) => {
-        console.log("Push reçu : ", event);
-        const title = "Notification push";
-        const options = {
-                body: event.data ? event.data.text() : "Message par défaut.",
-                icon: "/icon-192x192.png",
-                badge: "/icon-192x192.png",
-        };
-        event.waitUntil(self.registration.showNotification(title, options));
-});
 
 self.addEventListener("push", (event) => {
         console.log("Push reçu : ", event);
@@ -123,15 +121,6 @@ async function doSomeBackgroundSync() {
 }
 
 // Gestion du changement de contrôleur pour détecter une nouvelle version
-if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.addEventListener("controllerchange", function () {
-                // Affiche une notification ou une alerte pour indiquer à l'utilisateur qu'une mise à jour est disponible
-                alert("Une nouvelle version est disponible, veuillez recharger la page.");
-        });
-}
-
-navigator.serviceWorker.addEventListener("controllerchange", function () {
-        if (confirm("Une nouvelle version est disponible. Recharger la page maintenant ?")) {
-                window.location.reload();
-        }
+self.addEventListener("controllerchange", function () {
+        alert("Une nouvelle version est disponible, veuillez recharger la page.");
 });

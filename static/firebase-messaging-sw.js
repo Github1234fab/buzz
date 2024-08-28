@@ -1,25 +1,32 @@
-import * as firebase from "firebase/app";
-import "firebase/messaging";
+// Importer les scripts Firebase nécessaires
+importScripts("https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js");
+importScripts("https://www.gstatic.com/firebasejs/9.22.2/firebase-messaging.js");
 
-// Votre clé de serveur Firebase
+// Configuration de Firebase pour le service worker
 const firebaseConfig = {
-        messagingSenderId: "BPlvfZsRZjcO32p5zeMPiVnYRdJD1U8jie40vnzF7FgbzC6ZgxyKkQJlIuYIACMjrRyo6AKx7-Sftuiq5rY80xY",
+        apiKey: "AIzaSyDuXg-vTfxDVXZc_Lbazl1IAMZow-hh8oA",
+        authDomain: "fleche-18ba1.firebaseapp.com",
+        projectId: "fleche-18ba1",
+        storageBucket: "fleche-18ba1.appspot.com",
+        messagingSenderId: "1096439940539",
+        appId: "1:1096439940539:web:ffc791a18592d2f5fc309e",
+        vapidKey: "BA7CoHKR1lKVE-0ZfASVSNOfoBoLtYd7OjJNGfeJLTqG0_47YDVOiGKC-L9v5_EWcGvgXk06CeK2wbIzz2Kd-08",
 };
 
-// Initialiser Firebase
+// Initialiser Firebase dans le service worker
 firebase.initializeApp(firebaseConfig);
 
-// Obtenir une référence à l'objet Firebase Messaging
+// Obtenir une instance de Firebase Messaging
 const messaging = firebase.messaging();
 
-// Recevoir les messages
-messaging.onMessage((payload) => {
-        console.log("Received message", payload);
+// Gestion des messages en arrière-plan
+messaging.onBackgroundMessage((payload) => {
+        console.log("Received background message ", payload);
 
-        // Afficher une notification
-        const notificationTitle = payload.notification.title;
+        const notificationTitle = "Background Message Title";
         const notificationOptions = {
-                body: payload.notification.body,
+                body: "Background Message body.",
+                icon: "/firebase-logo.png",
         };
 
         self.registration.showNotification(notificationTitle, notificationOptions);
