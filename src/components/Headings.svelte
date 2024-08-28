@@ -1,6 +1,6 @@
 <script>
         export let headingName;
-        export let service;
+        // export let service;
 </script>
 
 

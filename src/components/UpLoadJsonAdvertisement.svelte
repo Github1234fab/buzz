@@ -5,7 +5,7 @@
 
   async function fetchJsonServicesData() {
     try {
-      const jsonDataCollection = collection(db, "jsonAdvertisement");
+      const jsonDataCollection = collection(db, "fleche-commerces");
       const querySnapshot = await getDocs(jsonDataCollection);
       let tempJsonServices = [];
 

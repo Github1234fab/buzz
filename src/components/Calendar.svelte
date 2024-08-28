@@ -7,11 +7,8 @@
 
         let startDate = "";
         let endDate = "";
-        // let filterField = "annonceur";
-        // let filterValue = "";
-        let type = "";
-        // let filterTitle = ""; // Nouveau champ pour filtrer par titre
-        let filterLieu = ""; // Nouveau champ pour filtrer par lieu
+        let filterLieu = "";
+         let type = "";
 
         let currentDate = writable(new Date());
         let today = new Date();
@@ -96,7 +93,6 @@
         }
 </script>
 
-
 <div class="wrapper-month-display">
         <p class="currentMonth">
                 {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
@@ -123,27 +119,24 @@
                 {/each}
         </div>
 
-        <!-- Interface utilisateur pour les filtres -->
+        <!-- Interface utilisateur pour les filtres   -->
         <Filter jsonDataByDate={$jsonDataByDate} {startDate} {endDate} {type} {filterLieu} bind:filteredEvents />
         <div class="event-info">
                 <div class="wrapper-collapse">
                         {#each $filteredEvents as event}
-                                <Collapse annonceur={event.annonceur} date={event.date} lieu={event.lieu} tarif={event.tarif}  fin={event.fin} début={event.début} type={event.type}/>
+                                <Collapse annonceur={event.annonceur} date={event.date} lieu={event.lieu} tarif={event.tarif} fin={event.fin} début={event.début} type={event.type} />
                         {/each}
-                </div>
-                <!-- <p class="current-date-display">
+                </div> 
+                <p class="current-date-display">
                               Date selectionnée:  {$selectedDate.toISOString().slice(0, 10)}
                         </p>
-                        <p class="number-events">{$filteredEvents.length} événement(s) prévu(s) pour cette date.</p> -->
+                        <p class="number-events">{$filteredEvents.length} événement(s) prévu(s) pour cette date.</p> 
         </div>
 {:else}
         <p>Chargement des données...</p>
 {/if}
 
-
-
 <style>
-       
         .wrapper-collapse {
                 display: flex;
                 flex-direction: column;
@@ -190,7 +183,7 @@
                 text-transform: capitalize;
                 margin-top: 1rem;
         }
-   
+
         .event-info {
                 display: flex;
                 flex-direction: column;
@@ -228,4 +221,10 @@
                 font-weight: bold;
                 border: 1px solid grey;
         }
+.calendar .day:nth-child(7n + 6),
+.calendar .day:nth-child(7n + 7) {
+    background-color: pink;
+    color: black;
+    font-weight: 600;
+}
 </style>

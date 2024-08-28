@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 <label for="towns">Choisissez une ville:</label>
 <select name="towns" id="towns">
         <option value="">--SVP choisissez une option--</option>

@@ -11,7 +11,7 @@ self.addEventListener("install", (event) => {
                         });
                 })
         );
-        // self.skipWaiting(); // Force l'activation immédiate de la nouvelle version
+         self.skipWaiting(); // Force l'activation immédiate de la nouvelle version
 });
 
 self.addEventListener("activate", (event) => {
@@ -80,16 +80,16 @@ function fetchAndUpdateCache(request) {
         });
 }
 
-// self.addEventListener("push", (event) => {
-//         console.log("Push reçu : ", event);
-//         const title = "Notification push";
-//         const options = {
-//                 body: event.data ? event.data.text() : "Message par défaut.",
-//                 icon: "/icon-192x192.png",
-//                 badge: "/icon-192x192.png",
-//         };
-//         event.waitUntil(self.registration.showNotification(title, options));
-// });
+self.addEventListener("push", (event) => {
+        console.log("Push reçu : ", event);
+        const title = "Notification push";
+        const options = {
+                body: event.data ? event.data.text() : "Message par défaut.",
+                icon: "/icon-192x192.png",
+                badge: "/icon-192x192.png",
+        };
+        event.waitUntil(self.registration.showNotification(title, options));
+});
 
 self.addEventListener("push", (event) => {
         console.log("Push reçu : ", event);
