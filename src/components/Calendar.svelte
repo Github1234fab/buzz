@@ -96,7 +96,6 @@
         }
 </script>
 
-
 <div class="wrapper-month-display">
         <p class="currentMonth">
                 {$currentDate.toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}
@@ -128,7 +127,7 @@
         <div class="event-info">
                 <div class="wrapper-collapse">
                         {#each $filteredEvents as event}
-                                <Collapse annonceur={event.annonceur} date={event.date} lieu={event.lieu} tarif={event.tarif}  fin={event.fin} début={event.début} type={event.type}/>
+                                <Collapse annonceur={event.annonceur} date={event.date} lieu={event.lieu} tarif={event.tarif} fin={event.fin} début={event.début} type={event.type} />
                         {/each}
                 </div>
                 <!-- <p class="current-date-display">
@@ -140,10 +139,7 @@
         <p>Chargement des données...</p>
 {/if}
 
-
-
 <style>
-       
         .wrapper-collapse {
                 display: flex;
                 flex-direction: column;
@@ -190,7 +186,7 @@
                 text-transform: capitalize;
                 margin-top: 1rem;
         }
-   
+
         .event-info {
                 display: flex;
                 flex-direction: column;
@@ -227,5 +223,11 @@
                 color: black;
                 font-weight: bold;
                 border: 1px solid grey;
+        }
+        .calendar .day:nth-child(7n + 6),
+        .calendar .day:nth-child(7n + 7) {
+                background-color: pink;
+                color: black;
+                font-weight: 600;
         }
 </style>
