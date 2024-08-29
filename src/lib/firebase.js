@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 // Configuration Firebase
 const firebaseConfig = {
@@ -17,34 +17,36 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// Vérifier que le code s'exécute uniquement dans le navigateur
 if (typeof window !== "undefined" && typeof navigator !== "undefined") {
-        import("firebase/messaging")
-                .then(({ getMessaging, getToken }) => {
-                        const messaging = getMessaging(app);
+        // Initialisation de Firebase Cloud Messaging
+        const messaging = getMessaging(app);
 
-                        async function requestPermission() {
-                                console.log("Requesting permission...");
-                                try {
-                                        const permission = await Notification.requestPermission();
-                                        if (permission === "granted") {
-                                                console.log("Notification permission granted.");
-                                                const token = await getToken(messaging, { vapidKey: "BA7CoHKR1lKVE-0ZfASVSNOfoBoLtYd7OjJNGfeJLTqG0_47YDVOiGKC-L9v5_EWcGvgXk06CeK2wbIzz2Kd-08" });
-                                                console.log("Notification token:", token);
+        async function requestPermission() {
+                console.log("Requesting permission...");
+                try {
+                        const permission = await Notification.requestPermission();
+                        if (permission === "granted") {
+                                console.log("Notification permission granted.");
 
-                                                // TODO: Envoyez ce token à votre serveur
-                                                // await saveTokenToServer(token);
-                                        } else {
-                                                console.log("Notification permission denied.");
-                                        }
-                                } catch (error) {
-                                        console.error("Error requesting notification permission:", error);
-                                }
+                                // Remplacez par votre clé VAPID
+                                const token = await getToken(messaging, { vapidKey: "BA7CoHKR1lKVE-0ZfASVSNOfoBoLtYd7OjJNGfeJLTqG0_47YDVOiGKC-L9v5_EWcGvgXk06CeK2wbIzz2Kd-08" });
+                                console.log("Notification token:", token);
+
+                                // TODO: Envoyer ce token à votre serveur pour stocker et utiliser pour l'envoi de notifications
+                                // await saveTokenToServer(token);
+                        } else {
+                                console.log("Notification permission denied.");
                         }
+                } catch (error) {
+                        console.error("Error requesting notification permission:", error);
+                }
+        }
 
-                        requestPermission();
-                })
-                .catch((error) => {
-                        console.error("Error loading Firebase messaging module:", error);
-                });
+        requestPermission();
+
+        // Gestion des messages reçus lorsque l'application est au premier plan
+        onMessage(messaging, (payload) => {
+                console.log("Message received. ", payload);
+                // Personnalisez la notification ici
+        });
 }
