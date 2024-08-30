@@ -4,6 +4,7 @@
         import UpLoadJsonAdvertisement from "../components/UpLoadJsonAdvertisement.svelte";
         import "../routes/styles.css";
         import { onMount } from "svelte";
+            import { initMessaging, initAnalytics } from "$lib/firebase";
 
      onMount(() => {
         // Initialiser Firebase Analytics et Messaging
