@@ -4,12 +4,8 @@ import fs from "fs";
 import path from "path";
 
 export default defineConfig({
-        root: "./src/app.html",
+
         plugins: [svelte()],
-        server: {
-                https: {
-                        key: fs.readFileSync(path.resolve(__dirname, "./src/certificates/your.key")),
-                        cert: fs.readFileSync(path.resolve(__dirname, "./src/certificates/your.crt")),
-                },
+    
         },
-});
+);
