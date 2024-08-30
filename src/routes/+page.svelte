@@ -3,14 +3,18 @@
         import UpLoadJson from "../components/UpLoadJson.svelte";
         import UpLoadJsonAdvertisement from "../components/UpLoadJsonAdvertisement.svelte";
         import "../routes/styles.css";
+        import { onMount } from "svelte";
 
-        
-            import { onMount } from "svelte";
-            onMount(() => {
+     onMount(() => {
+        // Initialiser Firebase Analytics et Messaging
+        initAnalytics();
+        initMessaging();
+
         if ("serviceWorker" in navigator) {
+            // Enregistrement du service worker principal
             navigator.serviceWorker.register("/service-worker.js")
                 .then((registration) => {
-                    console.log("Service Worker enregistré avec succès");
+                    console.log("Service Worker principal enregistré avec succès");
 
                     // Vérifier les mises à jour du Service Worker
                     registration.onupdatefound = () => {
@@ -41,7 +45,18 @@
                     });
                 })
                 .catch((error) => {
-                    console.error("Erreur lors de l'enregistrement du Service Worker:", error);
+                    console.error("Erreur lors de l'enregistrement du Service Worker principal:", error);
+                });
+
+            // Enregistrement du service worker pour Firebase Cloud Messaging
+            navigator.serviceWorker.register("/firebase-messaging-sw.js")
+                .then((registration) => {
+                    console.log("Service Worker Firebase enregistré avec succès");
+
+                    // Vérifiez les mises à jour et autres fonctionnalités spécifiques à Firebase si nécessaire
+                })
+                .catch((error) => {
+                    console.error("Erreur lors de l'enregistrement du Service Worker Firebase:", error);
                 });
         }
     });
